@@ -6,14 +6,16 @@ require 'ostruct'
 
 require 'sinatra' unless defined?(Sinatra)
 
+Mongo::Connection.new('localhost')
+
 configure do
   SiteConfig = OpenStruct.new(
                  :title => 'Your Application Name',
                  :author => 'Your Name',
                  :url_base => 'http://localhost:4567/'
                )
-  conn = Mongo::Connection.new
-  #MongoMapper.connection = XGen::Mongo::Driver::Mongo.new('localhost')
+               
+
   MongoMapper.database = 'notes'
 
   # load models

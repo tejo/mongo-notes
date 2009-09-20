@@ -13,8 +13,7 @@ Sinatra::Base.set :logging, false
 
 require 'application'
 
-conn = Mongo::Connection.new
-#MongoMapper.connection = XGen::Mongo::Driver::Mongo.new('localhost')
+
 MongoMapper.database = 'notes-test'
 
 Spec::Runner.configure do |config|

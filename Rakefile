@@ -34,6 +34,21 @@ namespace :gems do
   end
 end
 
+namespace :console do
+  desc 'run console'
+  task :run do
+    libs =  " -r irb/completion"
+    libs << " -r rubygems"
+    libs << " -r mongomapper" 
+    libs << " -r console_env"
+    libs << " -r lib/notes" 
+
+
+    exec "irb #{libs} --simple-prompt"
+    
+  end
+end
+
 task :environment do
   require 'environment'
 end

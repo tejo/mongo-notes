@@ -3,8 +3,13 @@ require "#{File.dirname(__FILE__)}/spec_helper"
 describe 'note' do
   before(:each) do
     @note = Note.new(:name => 'test note')
+    @note.save
   end
-
+  
+  specify 'should be one note in db' do
+    Note.count.should == 1
+  end
+  
   specify 'should be valid' do
     @note.should be_valid
   end
