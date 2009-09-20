@@ -6,17 +6,25 @@ require 'ostruct'
 
 require 'sinatra' unless defined?(Sinatra)
 
-Mongo::Connection.new('localhost')
+
+
+configure :test do
+  @@db = "notes-test"
+end
+
+configure :development, :production do
+  @@db = "notes"
+end
 
 configure do
   SiteConfig = OpenStruct.new(
-                 :title => 'Your Application Name',
-                 :author => 'Your Name',
+                 :title => 'My Notes',
+                 :author => 'Teddy',
                  :url_base => 'http://localhost:4567/'
                )
                
-
-  MongoMapper.database = 'notes'
+  Mongo::Connection.new('localhost')
+  MongoMapper.database = @@db
 
   # load models
   $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/lib")

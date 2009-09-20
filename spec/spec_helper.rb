@@ -1,3 +1,4 @@
+ENV['RACK_ENV'] = 'test'
 require 'rubygems'
 require 'sinatra'
 require 'spec'
@@ -14,11 +15,11 @@ Sinatra::Base.set :logging, false
 require 'application'
 
 
-MongoMapper.database = 'notes-test'
+MongoMapper.database = @@db
 
 Spec::Runner.configure do |config|
   # reset database before each example is run
-  config.before(:each) { MongoMapper.connection.drop_database('notes-test') }
+  config.before(:each) { MongoMapper.connection.drop_database(@@db) }
 end
 
 
