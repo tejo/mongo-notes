@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'spec'
 require 'spec/interop/test'
+require 'spec/expectations'
 require 'rack/test'
 
 # set test environment
@@ -14,9 +15,11 @@ require 'application'
 
 conn = Mongo::Connection.new
 #MongoMapper.connection = XGen::Mongo::Driver::Mongo.new('localhost')
-MongoMapper.database = 'notes'
+MongoMapper.database = 'notes-test'
 
 Spec::Runner.configure do |config|
   # reset database before each example is run
-  config.before(:each) { MongoMapper.connection.drop_database('notes-tes') }
+  config.before(:each) { MongoMapper.connection.drop_database('notes-test') }
 end
+
+
